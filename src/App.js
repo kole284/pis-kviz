@@ -74,8 +74,14 @@ function App() {
             <p className="score">
               Vaš rezultat: {score} / {shuffledQuestions.length}
             </p>
-            <p className="percentage">
-              ({Math.round((score / shuffledQuestions.length) * 100)}%)
+            <div className="percentage-badge">
+              {Math.round((score / shuffledQuestions.length) * 100)}%
+            </div>
+            <p className="percentage-text">
+              {score >= shuffledQuestions.length * 0.9 ? '🎉 Odličan rezultat!' :
+               score >= shuffledQuestions.length * 0.7 ? '👍 Dobar rezultat!' :
+               score >= shuffledQuestions.length * 0.5 ? '✓ Prošli ste!' :
+               '📚 Potrebno je još učenja'}
             </p>
             
             <div className="review-section">
@@ -107,6 +113,19 @@ function App() {
           </div>
         ) : (
           <>
+            <div className="progress-bar-container">
+              <div className="progress-bar" style={{width: `${((currentQuestion + (showAnswer ? 1 : 0)) / shuffledQuestions.length) * 100}%`}}></div>
+            </div>
+            
+            {answeredQuestions.length > 0 && (
+              <div className="current-score">
+                Trenutni rezultat: {score} / {answeredQuestions.length} 
+                <span className="current-percentage">
+                  ({Math.round((score / answeredQuestions.length) * 100)}%)
+                </span>
+              </div>
+            )}
+            
             <div className="question-section">
               <div className="question-count">
                 <span>Pitanje {currentQuestion + 1}</span> / {shuffledQuestions.length}
