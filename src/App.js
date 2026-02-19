@@ -175,6 +175,12 @@ function App() {
           </>
         )}
       </div>
+      
+      <footer className="footer">
+        <p>
+          Napravio <a href="https://github.com/kole284/" target="_blank" rel="noopener noreferrer">kole284</a>
+        </p>
+      </footer>
     </div>
   );
 }
