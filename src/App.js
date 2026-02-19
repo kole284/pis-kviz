@@ -65,8 +65,9 @@ function App() {
 
   return (
     <div className="app">
-      <div className="quiz-container">
-        <h1>PIS Kviz</h1>
+      <div className="content-wrapper">
+        <div className="quiz-container">
+          <h1>PIS Kviz</h1>
         
         {showScore ? (
           <div className="score-section">
@@ -174,6 +175,7 @@ function App() {
             </button>
           </>
         )}
+        </div>
       </div>
       
       <footer className="footer">
