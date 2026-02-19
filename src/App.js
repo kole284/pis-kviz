@@ -10,9 +10,29 @@ function App() {
   const [shuffledQuestions, setShuffledQuestions] = useState([]);
   const [showAnswer, setShowAnswer] = useState(false);
 
+  // Funkcija za mešanje opcija pitanja
+  const shuffleOptions = (question) => {
+    const options = [...question.options];
+    const correctAnswer = options[question.correct];
+    
+    // Mešamo opcije
+    const shuffledOptions = options.sort(() => Math.random() - 0.5);
+    
+    // Pronalazimo novi indeks tačnog odgovora
+    const newCorrectIndex = shuffledOptions.indexOf(correctAnswer);
+    
+    return {
+      ...question,
+      options: shuffledOptions,
+      correct: newCorrectIndex
+    };
+  };
+
   useEffect(() => {
-    // Mešamo pitanja na početku
-    const shuffled = [...questions].sort(() => Math.random() - 0.5);
+    // Mešamo pitanja i opcije na početku
+    const shuffled = [...questions]
+      .sort(() => Math.random() - 0.5)
+      .map(q => shuffleOptions(q));
     setShuffledQuestions(shuffled);
   }, []);
 
@@ -49,7 +69,9 @@ function App() {
   };
 
   const restartQuiz = () => {
-    const shuffled = [...questions].sort(() => Math.random() - 0.5);
+    const shuffled = [...questions]
+      .sort(() => Math.random() - 0.5)
+      .map(q => shuffleOptions(q));
     setShuffledQuestions(shuffled);
     setCurrentQuestion(0);
     setScore(0);
