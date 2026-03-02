@@ -30,6 +30,7 @@ function App() {
 
   useEffect(() => {
     // Mešamo pitanja i opcije na početku
+    console.log('Ukupno pitanja:', questions.length);
     const shuffled = [...questions]
       .sort(() => Math.random() - 0.5)
       .map(q => shuffleOptions(q));
